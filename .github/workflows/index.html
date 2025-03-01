@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Accounts ZATCA Setup Guide</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .main {
+            padding: 4rem 0;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .section h3 {
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary);
+        }
+        
+        .step-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .step-card {
+            flex: 1 1 300px;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .step-card h3 {
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-card ul {
+            padding-left: 1.5rem;
+        }
+        
+        .step-card li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-card p {
+            margin-bottom: 1rem;
+        }
+        
+        .code-block {
+            background-color: #f8fafc;
+            border-radius: 0.375rem;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        
+        .note {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.375rem;
+        }
+        
+        .warning {
+            background-color: #fff7ed;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.375rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        table th {
+            background-color: #f1f5f9;
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background-color: #f8fafc;
+            border-radius: 0.375rem;
+        }
+        
+        .faq-answer {
+            padding: 1rem;
+            border-left: 2px solid var(--primary);
+            margin-top: 0.5rem;
+            background-color: white;
+            border-radius: 0 0.375rem 0.375rem 0;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .step-card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container hero">
+            <h1>ZATCA E-Invoice Implementation Guide</h1>
+            <p>Step-by-step instructions for implementing ZATCA (Zakat, Tax and Customs Authority) Electronic Invoicing in Easy Accounts ERP System</p>
+            <div class="hero-buttons">
+                <a href="#getting-started" class="btn">Get Started</a>
+                <a href="#troubleshooting" class="btn btn-outline">Troubleshooting</a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main container">
+        <section id="overview" class="section">
+            <h2>Overview</h2>
+            <p>This guide will help you implement ZATCA e-invoicing in your Easy Accounts ERP system to comply with Saudi Arabia's e-invoicing requirements. The implementation process involves both simulation and production environments to ensure proper compliance.</p>
+            
+            <div class="note">
+                <strong>Important:</strong> Before beginning, ensure you have the latest version of Easy Accounts ERP that supports ZATCA e-invoicing and have backed up your current database.
+            </div>
+            
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>Easy Accounts ERP Software (latest version)</li>
+                <li>Company details and registration information</li>
+                <li>CSR Generator software (available from Dropbox)</li>
+                <li>Internet connection to access ZATCA portal</li>
+            </ul>
+        </section>
+        
+        <section id="getting-started" class="section">
+            <h2>Implementation Process</h2>
+            <p>Follow these steps to implement ZATCA e-invoicing in your Easy Accounts ERP system:</p>
+            
+            <div class="step-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Update Company Information</h3>
+                    <p>Ensure all company details are up-to-date in your Easy Accounts company settings:</p>
+                    <ul>
+                        <li>Legal business name</li>
+                        <li>VAT registration number</li>
+                        <li>Business address</li>
+                        <li>Contact information</li>
+                    </ul>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Update to Latest Version</h3>
+                    <ul>
+                        <li>Backup your current database</li>
+                        <li>Install the latest version of Easy Accounts ERP that supports ZATCA e-invoicing</li>
+                    </ul>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Generate Simulation CSID Keys</h3>
+                    <ol>
+                        <li>Download the CSR Generator software from Dropbox</li>
+                        <li>Open CSR Generator</li>
+                        <li>Enter your company details including:
+                            <ul>
+                                <li>Country (C): SA</li>
+                                <li>Organization (O): Your company name</li>
+                                <li>Location Short Address: Your location code</li>
+                                <li>Common Name (CN): TST/PRD-CRN-TRN format</li>
+                                <li>Registered Address: Your business address</li>
+                                <li>Business Category: Your business type</li>
+                                <li>TRN/VAT Number: Your VAT registration number</li>
+                                <li>Title (T): 1100 for Standard & Simplified</li>
+                            </ul>
+                        </li>
+                        <li>Request OTP from ZATCA Simulation Portal</li>
+                        <li>Select "Simulation" as Environment Type</li>
+                        <li>Click "Generate" button</li>
+                    </ol>
+                    <p>The system will generate:
+                        <ul>
+                            <li>CSR (Certificate Signing Request)</li>
+                            <li>Private Key</li>
+                            <li>Compliance CSID (Binary Security Token)</li>
+                            <li>Client Secret</li>
+                            <li>Compliance Request ID</li>
+                        </ul>
+                    </p>
+                    <div class="note">Save all generated information securely!</div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Update Easy Accounts Database Settings</h3>
+                    <ol>
+                        <li>Set ZATCA Environment Type = 1 (1 for Simulation, 0 for Production)</li>
+                        <li>Set E-Invoice Enabled = TRUE</li>
+                        <li>Set ISTESTEINVOICE = TRUE (for Simulation Compliance)</li>
+                        <li>Enter the values from CSR Generator into the database columns:
+                            <ul>
+                                <li>ZATCA CSR</li>
+                                <li>ZATCA Private Key</li>
+                                <li>ZATCACBST (Binary Security Token)</li>
+                                <li>ZATCA SSECRET (Client Secret)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3>Upload Six Test Invoices</h3>
+                    <p>Upload the following six types of test invoices for simulation compliance:</p>
+                    <ol>
+                        <li>B2C (Business to Consumer) Invoice</li>
+                        <li>B2B (Business to Business) Invoice</li>
+                        <li>Sales Invoice</li>
+                        <li>Sales Return Invoice</li>
+                        <li>Purchase Return Invoice (CNTRL + F12)</li>
+                    </ol>
+                    <div class="warning">Verify each upload is successful before proceeding to the next step.</div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h3>Generate Simulation Production Using Python Software</h3>
+                    <ol>
+                        <li>Download the Python Software from Dropbox</li>
+                        <li>Configure the software with the following parameters:
+                            <ul>
+                                <li>API URL: https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/production/csid</li>
+                                <li>Username: Binary Security Token (from CSR Generator)</li>
+                                <li>Password: Client Secret (from CSR Generator)</li>
+                                <li>Request Body: Compliance Request ID (from CSR Generator)</li>
+                                <li>Accept Version: V2</li>
+                            </ul>
+                        </li>
+                        <li>Execute the software to generate the Production CSID keys</li>
+                    </ol>
+                    <p>You will receive response:
+                        <ul>
+                            <li>ZATCA PBST</li>
+                            <li>ZATCA PSECRET</li>
+                        </ul>
+                    </p>
+                    <div class="code-block">{
+  "compliance_request_id" : "1234567890123"
+}</div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">7</div>
+                    <h3>Update Database with Production Simulation Keys</h3>
+                    <ol>
+                        <li>Update the database with:
+                            <ul>
+                                <li>ZATCA PBST</li>
+                                <li>ZATCA PSECRET</li>
+                            </ul>
+                        </li>
+                        <li>Set ISTESTEINVOICE = FALSE</li>
+                        <li>Upload six more test invoices as specified in Step 5</li>
+                        <li>Verify all invoices are successfully processed in Simulation Production</li>
+                    </ol>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">8</div>
+                    <h3>Move to Production Core</h3>
+                    <p>After successful simulation, move to production:</p>
+                    <ol>
+                        <li>Change Environment Type in CSR Generator: Select "Production"</li>
+                        <li>Change Database: Set ZATCA Environment Type = 0</li>
+                        <li>Generate OTP from ZATCA Production Portal</li>
+                        <li>Follow the same process as simulation, but use in Generate Production CSID:
+                            <div class="code-block">API URL: https://gw-fatoora.zatca.gov.sa/e-invoicing/core/production/csid</div>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">9</div>
+                    <h3>Final Configuration</h3>
+                    <ol>
+                        <li>Update the database with production keys (CSR, private key, ZATCA CBST, ZATCA CSECRET, etc.)</li>
+                        <li>Set ZATCA Environment Type = 0 (for Production)</li>
+                        <li>Verify all settings are correct</li>
+                        <li>Start generating compliant e-invoices in production core</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        
+        <section id="troubleshooting" class="section">
+            <h2>Troubleshooting</h2>
+            <p>If you encounter issues during setup, try the following solutions:</p>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Setup Issues</span>
+                </div>
+                <div class="faq-answer">
+                    <ul>
+                        <li>Verify all company information is correct in company settings (address, VAT, etc.)</li>
+                        <li>Ensure OTP is valid and not expired</li>
+                        <li>Check network connectivity to ZATCA servers</li>
+                        <li>Verify database settings match the current environment (simulation vs. production)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>E-Invoice Generation Issues</span>
+                </div>
+                <div class="faq-answer">
+                    <h4>Validate XML File on ZATCA Site:</h4>
+                    <ol>
+                        <li>Locate the XML file inside the EasyAccounts folder</li>
+                        <li>Upload it to the ZATCA e-invoice validation tool to check for errors:
+                            <div class="code-block">https://sandbox.zatca.gov.sa/Compliance</div>
+                        </li>
+                    </ol>
+                    
+                    <h4>Review Validation Results:</h4>
+                    <ul>
+                        <li>If errors are found, note the issues displayed on the ZATCA site</li>
+                    </ul>
+                    
+                    <h4>Check Error Logs:</h4>
+                    <ul>
+                        <li>Open error logs.txt in the EasyAccounts folder</li>
+                        <li>Look for any recorded issues related to XML structure, missing fields, or invalid data</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Easy Accounts ZATCA E-Invoice Implementation Guide</p>
+            <div class="footer-links">
+                <a href="#overview">Overview</a>
+                <a href="#getting-started">Implementation Process</a>
+                <a href="#troubleshooting">Troubleshooting</a>
+            </div>
+            <p>This guide is designed to help you comply with Saudi Arabia's e-invoicing requirements</p>
+        </div>
+    </footer>
+</body>
+</html>
